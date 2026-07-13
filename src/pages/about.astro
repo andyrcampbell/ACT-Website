@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// All content drawn verbatim from andyrcampbell.com.
+// Designations and framing sentences approved by Andy 2026-07-12.
+// Client/company names withheld — industries only (Andy confirmed 2026-07-12).
+// Portrait placeholder remains until Andy supplies image file.
+---
+
+<BaseLayout
+  title="About — Alternative Concept Technologies"
+  description="Andrew R. Campbell — Chartered Mechanical Engineer, Technical Executive, and Founder of Alternative Concept Technologies."
+>
+
+  <!-- ===== ABOUT HERO ===== -->
+  <section class="about-hero" aria-labelledby="about-name">
+    <div class="container">
+      <div class="about-hero-grid">
+        <div>
+          <p class="eyebrow">Founder &amp; Technical Director</p>
+          <!-- Name and title — Approved by Andy 2026-07-12 -->
+          <h1 class="about-name" id="about-name">Andrew R. Campbell</h1>
+          <p class="about-title">Founder and Technical Director, Alternative Concept Technologies</p>
+        </div>
+        <!-- Portrait placeholder — image to be supplied by Andy.
+             When ready: replace with
+             <img src={`${import.meta.env.BASE_URL}images/andy-campbell.jpg`}
+             alt="Andrew R. Campbell" width="280" height="373" loading="eager" /> -->
+        <div class="portrait-placeholder" role="img" aria-label="Portrait — Andy to supply image">
+          [Andy to supply<br>portrait image]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BODY ===== -->
+  <section class="section about-body" aria-label="Biography and credentials">
+    <div class="container">
+
+      <!-- Bio — verbatim summary from andyrcampbell.com + ACT context sentences.
+           Approved by Andy 2026-07-12. -->
+      <div class="about-block">
+        <p class="about-bio">
+          A highly experienced Technical Executive with more than 15 years of
+          hands-on experience in Mechanical Engineering, Computer Aided Engineering,
+          and Product Lifecycle Management — improving product quality, time to market,
+          safety, process integrity, and customer satisfaction through large-scale
+          software implementations, both domestically and internationally.
+          <br /><br />
+          That accumulated expertise is the foundation of Alternative Concept
+          Technologies: engineering software built by engineers who understand what
+          the tools need to do, grounded in real-world practice across some of the
+          world's most demanding industries.
+        </p>
+      </div>
+
+      <!-- Competencies — verbatim from andyrcampbell.com -->
+      <div class="about-block">
+        <p class="about-section-label">Core Competencies</p>
+        <ul class="pill-group" role="list" aria-label="Core competencies">
+          <li class="pill">Business Development &amp; Project Management</li>
+          <li class="pill">Team Development &amp; Consulting Leadership</li>
+          <li class="pill">Product Lifecycle Management (PLM)</li>
+          <li class="pill">Engineering Design &amp; Analysis</li>
+          <li class="pill">CAD/CAE Technologies</li>
+          <li class="pill">Enterprise Software Deployment</li>
+          <li class="pill">Technical Sales Leadership</li>
+          <li class="pill">International Cross-Functional Project Management</li>
+        </ul>
+      </div>
+
+      <!-- Industries — sectors only; no client names (Andy confirmed 2026-07-12) -->
+      <div class="about-block">
+        <p class="about-section-label">Industry Experience</p>
+        <ul class="pill-group" role="list" aria-label="Industry experience">
+          <li class="pill">Automotive</li>
+          <li class="pill">Aerospace</li>
+          <li class="pill">Defense</li>
+          <li class="pill">Medical</li>
+          <li class="pill">High Technology</li>
+          <li class="pill">Consumer Packaged Goods</li>
+          <li class="pill">Industrial Equipment</li>
+        </ul>
+        <p class="mt-3" style="font-size:14px;">
+          Including Fortune 500 companies, deployed domestically and internationally.
+        </p>
+      </div>
+
+      <!-- Education & Credentials — verbatim from andyrcampbell.com -->
+      <div class="about-block">
+        <p class="about-section-label">Education &amp; Credentials</p>
+        <div class="accent-block">
+          <p class="eyebrow" style="margin-bottom:0.5rem;">Education</p>
+          <p style="color:var(--text-primary);font-weight:500;margin:0;">
+            BSc with Honors in Mechanical Engineering
+          </p>
+          <p style="margin:0;">University of Bath, UK</p>
+
+          <p class="eyebrow" style="margin-top:1.5rem;margin-bottom:0.5rem;">Professional Credentials</p>
+          <p style="color:var(--text-primary);font-weight:500;margin:0;">
+            Chartered Engineer, M.I.Mech.E.
+          </p>
+          <p style="margin:0;">Member, Institution of Mechanical Engineers</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>

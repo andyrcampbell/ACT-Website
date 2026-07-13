@@ -1,0 +1,58 @@
+---
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+
+// BASE_URL = '/ACT-Website/' when base is configured; '/' in local dev without base.
+// All internal hrefs are constructed from base so they work under any project-page base.
+const base = import.meta.env.BASE_URL;
+
+const links = [
+  { href: base,                  label: 'Home'     },
+  { href: `${base}about`,        label: 'About'    },
+  { href: `${base}projects`,     label: 'Projects' },
+  { href: `${base}contact`,      label: 'Contact'  },
+];
+
+function isActive(href: string, path: string): boolean {
+  // Home: exact match on the base root (with or without trailing slash)
+  if (href === base || href === base.replace(/\/$/, '')) {
+    return path === base || path === base.replace(/\/$/, '') || path === `${base}/`;
+  }
+  return path.startsWith(href);
+}
+---
+
+<header class="site-nav" role="banner">
+  <div class="nav-inner container">
+    <a href={base} class="nav-wordmark" aria-label="Alternative Concept Technologies — Home">
+      <span class="nav-wordmark-full">Alternative Concept Technologies</span>
+      <span class="nav-wordmark-short" aria-hidden="true">ACT</span>
+    </a>
+
+    <button
+      class="nav-hamburger"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      aria-label="Open navigation"
+      type="button"
+    >
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
+    <nav id="primary-nav" class="nav-links" aria-label="Primary navigation">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class:list={['nav-link', { 'is-active': isActive(link.href, currentPath) }]}
+          aria-current={isActive(link.href, currentPath) ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+// Pull first 3 projects (by order field) for the preview grid
+const allProjects = await getCollection('projects');
+const previewProjects = allProjects
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+// BASE_URL = '/ACT-Website/' on GitHub Pages; '/' in local dev
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Alternative Concept Technologies"
+  description="Precision engineering software tools for mechanical design, simulation, and analysis — built by engineers who understand the workflows."
+>
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Hero">
+    <!-- Ambient animated SVG lines — pure CSS keyframes, no JS.
+         prefers-reduced-motion: animations disabled via global.css -->
+    <div class="hero-lines" aria-hidden="true">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <line class="hl-1" x1="0" y1="32%" x2="100%" y2="18%"
+          stroke="#5865F7" stroke-opacity="0.13" stroke-width="1" />
+        <line class="hl-2" x1="0" y1="68%" x2="100%" y2="78%"
+          stroke="#5865F7" stroke-opacity="0.09" stroke-width="1" />
+        <line class="hl-3" x1="22%" y1="0%" x2="38%" y2="100%"
+          stroke="#5865F7" stroke-opacity="0.08" stroke-width="1" />
+        <line class="hl-4" x1="74%" y1="0%" x2="64%" y2="100%"
+          stroke="#5865F7" stroke-opacity="0.07" stroke-width="1" />
+      </svg>
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+        <p class="eyebrow" aria-label="Company name">Alternative Concept Technologies</p>
+        <!-- Hero headline — Approved by Andy 2026-07-12 -->
+        <h1 class="hero-h1">We build precise tools<br>for engineers.</h1>
+        <!-- Hero sub-paragraph — Approved by Andy 2026-07-12 -->
+        <p class="hero-sub">
+          Simulation, design, and manufacturing workflows — bridged by
+          engineer-authored software grounded in real CAD/CAE practice.
+        </p>
+        <a href={`${base}projects`} class="btn btn-primary">View Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT TEASER ===== -->
+  <section class="section about-teaser" aria-labelledby="teaser-heading">
+    <div class="container">
+      <div class="about-teaser-grid">
+        <div class="about-teaser-text">
+          <h2 id="teaser-heading">About</h2>
+          <p>
+            Alternative Concept Technologies builds precision engineering software at
+            the intersection of simulation, design, and manufacturing. Founded by
+            Andrew R. Campbell, a Chartered Mechanical Engineer with over 15 years in
+            CAD/CAE and PLM across Fortune 500 organisations — every tool we ship is
+            grounded in real engineering workflows.
+          </p>
+          <a href={`${base}about`} class="link-arrow">
+            Learn more
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <!-- Portrait placeholder — image to be supplied by Andy.
+             When ready: replace with <img src={`${base}images/andy-campbell.jpg`}
+             alt="Andrew R. Campbell, Founder and Technical Director" width="340" height="453" loading="lazy" /> -->
+        <div class="portrait-placeholder" role="img" aria-label="Portrait — Andy to supply image">
+          [Andy to supply<br>portrait image]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS PREVIEW ===== -->
+  <section class="section projects-preview" aria-labelledby="preview-heading">
+    <div class="container">
+      <div class="projects-preview-header">
+        <h2 id="preview-heading">Projects</h2>
+        <a href={`${base}projects`} class="link-arrow">
+          View all
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="preview-grid">
+        {previewProjects.map(project => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT CTA BAND ===== -->
+  <section class="contact-band" aria-labelledby="cta-heading">
+    <div class="container">
+      <p id="cta-heading">Available for collaboration and consulting.</p>
+      <!-- Contact email: andyr@campbell.us.com — Approved by Andy 2026-07-12 -->
+      <a href="mailto:andyr@campbell.us.com" class="contact-email">
+        andyr@campbell.us.com
+      </a>
+    </div>
+  </section>
+</BaseLayout>

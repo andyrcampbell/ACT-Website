@@ -1,0 +1,119 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Alternative Concept Technologies — Precision engineering tools for mechanical design, simulation, and analysis.',
+} = Astro.props;
+
+// With base: '/ACT-Website', Astro.url.pathname includes the base prefix.
+// Astro.site = 'https://andyrcampbell.github.io'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://andyrcampbell.github.io');
+
+// BASE_URL = '/ACT-Website/' (with trailing slash) when base is set.
+const base = import.meta.env.BASE_URL;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <!-- Favicon: prefixed with BASE_URL for project-page base path correctness -->
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url"         content={canonicalURL} />
+
+    <!-- Google Fonts: Inter + JetBrains Mono
+         font-display: swap included in Google's CSS response -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <!-- Structured data — Approved by Andy 2026-07-12 -->
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alternative Concept Technologies",
+      "url": "https://andyrcampbell.github.io/ACT-Website",
+      "founder": {
+        "@type": "Person",
+        "name": "Andrew R. Campbell",
+        "jobTitle": "Founder and Technical Director"
+      },
+      "sameAs": ["https://www.linkedin.com/in/andyrcampbell"]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Skip to main content — keyboard / screen reader accessibility -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Sentinel element: observed by IntersectionObserver for scroll-triggered nav state -->
+    <div class="nav-sentinel" aria-hidden="true" style="position:absolute;top:0;height:1px;width:100%;pointer-events:none;"></div>
+
+    <Nav currentPath={Astro.url.pathname} />
+
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!--
+      Minimal inline script: nav scroll state + hamburger toggle.
+      ~380 bytes uncompressed. No framework. Progressive enhancement
+      (nav is fully usable without JS — links visible, hamburger hidden on desktop).
+    -->
+    <script is:inline>
+      (function () {
+        // --- Nav scroll effect ---
+        var nav = document.querySelector('.site-nav');
+        var sentinel = document.querySelector('.nav-sentinel');
+        if (nav && sentinel) {
+          var obs = new IntersectionObserver(function (entries) {
+            nav.classList.toggle('scrolled', !entries[0].isIntersecting);
+          }, { threshold: 0 });
+          obs.observe(sentinel);
+        }
+
+        // --- Mobile hamburger ---
+        var btn = document.querySelector('.nav-hamburger');
+        var menu = document.getElementById('primary-nav');
+        if (btn && menu) {
+          btn.addEventListener('click', function () {
+            var isOpen = menu.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', String(isOpen));
+            btn.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+          });
+          // Close on outside click
+          document.addEventListener('click', function (e) {
+            if (!nav.contains(e.target)) {
+              menu.classList.remove('is-open');
+              btn.setAttribute('aria-expanded', 'false');
+              btn.setAttribute('aria-label', 'Open navigation');
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
