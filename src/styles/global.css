@@ -554,7 +554,8 @@
     position: relative;
     min-height: 100svh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
     padding-top: var(--nav-height);
     overflow: hidden;
     background: var(--bg-base);
@@ -626,6 +627,49 @@
     line-height: 1.65;
     color: var(--text-secondary);
     margin-bottom: var(--sp-5);
+  }
+
+  /* ---- Hero product screenshot ---- */
+  /* Outer band: z-index so it sits above the animated SVG lines */
+  .hero-screenshot-outer {
+    position: relative;
+    z-index: 1;
+    padding-bottom: var(--sp-12);
+    width: 100%;
+  }
+
+  /* Framed card — white-bg screenshot on dark theme needs deliberate containment */
+  .hero-screenshot-frame {
+    margin: 0;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    /* Lift the card off the dark bg with a deep shadow + faint accent rim */
+    box-shadow:
+      0 4px 40px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(88, 101, 247, 0.1);
+  }
+
+  /* The <Image> (or <img>) fills the frame; top corners clip to the frame radius */
+  .hero-screenshot-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Mono caption bar — matches eyebrow / badge typographic register */
+  .hero-screenshot-caption {
+    margin: 0;
+    padding: 10px var(--sp-3);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border);
+    text-align: center;
   }
 }
 
