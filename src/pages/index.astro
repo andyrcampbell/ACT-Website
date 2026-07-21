@@ -41,6 +41,27 @@ const base = import.meta.env.BASE_URL;
       </svg>
     </div>
 
+    <!-- ===== HERO PRODUCT SCREENSHOT ===== -->
+    <!-- Dark-theme FE Mesh Studio capture. Placed above the headline so the
+         product leads and the copy confirms. Astro <Image> → WebP at build.
+         loading="eager" — above the fold; width/height prevent CLS. -->
+    <div class="hero-screenshot-outer">
+      <div class="container">
+        <figure class="hero-screenshot-frame">
+          <Image
+            src={heroImg}
+            alt="FE Mesh Studio desktop application in dark theme: STEP surface model on the left, tetrahedral finite element mesh with Von Mises stress colour map on the right"
+            width={1040}
+            quality={85}
+            loading="eager"
+          />
+          <figcaption class="hero-screenshot-caption">
+            FE Mesh Studio — STEP import · mesh generation · FEA stress visualisation
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
     <div class="container">
       <div class="hero-content">
         <p class="eyebrow" aria-label="Company name">Alternative Concept Technologies</p>
@@ -52,27 +73,6 @@ const base = import.meta.env.BASE_URL;
           engineer-authored software grounded in real CAD/CAE practice.
         </p>
         <a href={`${base}projects`} class="btn btn-primary">View Projects</a>
-      </div>
-    </div>
-
-    <!-- ===== HERO PRODUCT SCREENSHOT ===== -->
-    <!-- FE Mesh Studio screenshot: authentic product UI, framed for dark theme.
-         Astro <Image> outputs WebP at display width, preserving aspect ratio.
-         loading="eager" — above the fold; width/height prevent CLS. -->
-    <div class="hero-screenshot-outer">
-      <div class="container">
-        <figure class="hero-screenshot-frame">
-          <Image
-            src={heroImg}
-            alt="FE Mesh Studio desktop application: a STEP surface model displayed on the left alongside a tetrahedral finite element mesh on the right, with a Von Mises stress colour map showing structural analysis results"
-            width={1040}
-            quality={85}
-            loading="eager"
-          />
-          <figcaption class="hero-screenshot-caption">
-            FE Mesh Studio — STEP import · mesh generation · FEA stress visualisation
-          </figcaption>
-        </figure>
       </div>
     </div>
   </section>

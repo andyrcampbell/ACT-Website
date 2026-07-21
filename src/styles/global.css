@@ -611,11 +611,11 @@
     .hl-1, .hl-2, .hl-3, .hl-4 { animation: none; }
   }
 
-  /* Hero content */
+  /* Hero content — sits below screenshot; top padding removed, bottom kept */
   .hero-content {
     position: relative;
     z-index: 1;
-    padding: var(--sp-12) 0;
+    padding: 0 0 var(--sp-12);
   }
   .hero-h1 {
     margin-bottom: var(--sp-3);
@@ -630,35 +630,36 @@
   }
 
   /* ---- Hero product screenshot ---- */
-  /* Outer band: z-index so it sits above the animated SVG lines */
+  /* Sits above the hero section (before eyebrow/h1). z-index keeps it above
+     the animated SVG lines. Padding: breathing room below nav (top) and
+     gap to the headline block (bottom). */
   .hero-screenshot-outer {
     position: relative;
     z-index: 1;
-    padding-bottom: var(--sp-12);
+    padding: var(--sp-6) 0 var(--sp-8);
     width: 100%;
   }
 
-  /* Framed card — white-bg screenshot on dark theme needs deliberate containment */
+  /* Dark-on-dark frame treatment: the new screenshot is near-black, matching
+     the page bg (#0C0C10). No fill needed — border gives edge definition.
+     border-radius uses --card-radius token (fixes previous 12px hardcode). */
   .hero-screenshot-frame {
     margin: 0;
-    background: var(--bg-elevated);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--card-radius);
     overflow: hidden;
-    /* Lift the card off the dark bg with a deep shadow + faint accent rim */
-    box-shadow:
-      0 4px 40px rgba(0, 0, 0, 0.6),
-      0 0 0 1px rgba(88, 101, 247, 0.1);
+    /* Faint accent presence — separates card from bg without a heavy shadow */
+    box-shadow: 0 0 0 1px rgba(88, 101, 247, 0.08);
   }
 
-  /* The <Image> (or <img>) fills the frame; top corners clip to the frame radius */
+  /* The <Image> fills the frame; border-radius clips via overflow:hidden above */
   .hero-screenshot-frame img {
     display: block;
     width: 100%;
     height: auto;
   }
 
-  /* Mono caption bar — matches eyebrow / badge typographic register */
+  /* Mono caption bar — bg-surface gives it slight lift against the dark image */
   .hero-screenshot-caption {
     margin: 0;
     padding: 10px var(--sp-3);
@@ -667,10 +668,11 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--text-secondary);
-    background: var(--bg-elevated);
+    background: var(--bg-surface);
     border-top: 1px solid var(--border);
     text-align: center;
   }
+
 }
 
 /* --- Home page sections ----------------------------------- */
