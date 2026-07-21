@@ -1,10 +1,25 @@
 ---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/images/logoact.png';
+
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="footer-copy">© {year} Alternative Concept Technologies</p>
+    <!-- Logo replaces company-name text; © year sits beside it in a flex row -->
+    <p class="footer-copy footer-logo-wrap">
+      <Image
+        src={logoImg}
+        alt="Alternative Concept Technologies"
+        width={400}
+        height={225}
+        class="footer-logo"
+        loading="lazy"
+        quality={90}
+      />
+      <span>© {year}</span>
+    </p>
     <a
       href="https://www.linkedin.com/in/andyrcampbell"
       class="footer-link"

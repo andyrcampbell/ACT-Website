@@ -379,21 +379,30 @@
     position: relative;
   }
 
-  /* Wordmark */
+  /* Wordmark / logo link */
   .nav-wordmark {
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-primary);
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    letter-spacing: -0.01em;
-    white-space: nowrap;
     flex-shrink: 0;
   }
-  .nav-wordmark:hover {
-    color: var(--text-primary);
-    text-decoration: none;
+  .nav-wordmark:hover { text-decoration: none; }
+
+  /* Logo image — height governs optical size; width scales with aspect ratio.
+     36px fits neatly inside the 64px nav bar with flexbox centering. */
+  .nav-logo {
+    display: block;
+    height: 36px;
+    width: auto;
   }
+
+  @media (max-width: 767px) {
+    /* Slightly smaller on mobile to share bar with hamburger */
+    .nav-logo { height: 30px; }
+  }
+
+  /* .nav-wordmark-full / .nav-wordmark-short left in place as dead CSS —
+     elements removed from Nav.astro, rules harmless. */
   .nav-wordmark-short { display: none; }
 
   /* Desktop nav links */
@@ -502,6 +511,19 @@
     font-size: 14px;
     color: var(--text-secondary);
     margin: 0;
+  }
+
+  /* Footer logo lockup: logo image + © year in a flex row */
+  .footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  /* 28px — visibly smaller than nav logo (36px), appropriate for a footer */
+  .footer-logo {
+    display: block;
+    height: 28px;
+    width: auto;
   }
   .footer-link {
     font-size: 14px;

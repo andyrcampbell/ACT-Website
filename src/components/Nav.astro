@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/images/logoact.png';
+
 interface Props {
   currentPath: string;
 }
@@ -26,9 +29,18 @@ function isActive(href: string, path: string): boolean {
 
 <header class="site-nav" role="banner">
   <div class="nav-inner container">
+    <!-- Logo replaces text wordmark. aria-label on <a> provides accessible name;
+         img alt="" avoids redundant announcement. Base-aware href. -->
     <a href={base} class="nav-wordmark" aria-label="Alternative Concept Technologies — Home">
-      <span class="nav-wordmark-full">Alternative Concept Technologies</span>
-      <span class="nav-wordmark-short" aria-hidden="true">ACT</span>
+      <Image
+        src={logoImg}
+        alt=""
+        width={400}
+        height={225}
+        class="nav-logo"
+        loading="eager"
+        quality={90}
+      />
     </a>
 
     <button
