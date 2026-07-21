@@ -59,7 +59,7 @@
     --max-width:      1040px;
     --page-padding:   clamp(24px, 6vw, 96px);
     --section-pad:    96px;
-    --nav-height:     64px;
+    --nav-height:     106px;  /* 90px logo + 8px breathing room each side */
     --card-gap:       24px;
     --card-radius:    8px;
 
@@ -71,7 +71,10 @@
   }
 
   @media (max-width: 767px) {
-    :root { --section-pad: 64px; }
+    :root {
+      --section-pad: 64px;
+      --nav-height:  91px;  /* 75px logo + 8px breathing room each side */
+    }
   }
 }
 
@@ -389,16 +392,15 @@
   .nav-wordmark:hover { text-decoration: none; }
 
   /* Logo image — height governs optical size; width scales with aspect ratio.
-     36px fits neatly inside the 64px nav bar with flexbox centering. */
+     90px desktop / 75px mobile (2.5× the original 36/30px sizes per Andy). */
   .nav-logo {
     display: block;
-    height: 36px;
+    height: 90px;
     width: auto;
   }
 
   @media (max-width: 767px) {
-    /* Slightly smaller on mobile to share bar with hamburger */
-    .nav-logo { height: 30px; }
+    .nav-logo { height: 75px; }
   }
 
   /* .nav-wordmark-full / .nav-wordmark-short left in place as dead CSS —
@@ -519,10 +521,10 @@
     align-items: center;
     gap: 12px;
   }
-  /* 28px — visibly smaller than nav logo (36px), appropriate for a footer */
+  /* 70px — 2.5× the original 28px per Andy */
   .footer-logo {
     display: block;
-    height: 28px;
+    height: 70px;
     width: auto;
   }
   .footer-link {
