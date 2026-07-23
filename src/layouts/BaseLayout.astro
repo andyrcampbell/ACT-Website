@@ -13,12 +13,13 @@ const {
   description = 'Alternative Concept Technologies — Precision engineering tools for mechanical design, simulation, and analysis.',
 } = Astro.props;
 
-// With base: '/ACT-Website', Astro.url.pathname includes the base prefix.
-// Astro.site = 'https://andyrcampbell.github.io'
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://andyrcampbell.github.io');
+// Astro.site = 'https://alternativeconcepttechnologies.com' (set in astro.config.mjs)
+// No base path — served from Hostinger public_html root.
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://alternativeconcepttechnologies.com');
 
-// BASE_URL = '/ACT-Website/' (with trailing slash) when base is set.
-const base = import.meta.env.BASE_URL;
+// BASE_URL = '/ACT-Website' (no trailing slash) when base is set in astro.config.
+// Strip any trailing slash so we can append '/filename' safely in both environments.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <!DOCTYPE html>
@@ -29,8 +30,11 @@ const base = import.meta.env.BASE_URL;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    <!-- Favicon: prefixed with BASE_URL for project-page base path correctness -->
-    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <!-- Favicon set: derived from the ACT logo A-mark + swoosh -->
+    <link rel="apple-touch-icon" sizes="180x180"     href={`${base}/apple-touch-icon.png`} />
+    <link rel="icon" type="image/png" sizes="32x32"  href={`${base}/favicon-32x32.png`} />
+    <link rel="icon" type="image/x-icon"             href={`${base}/favicon.ico`} />
+    <link rel="icon" type="image/svg+xml"             href={`${base}/favicon.svg`} />
 
     <!-- Open Graph -->
     <meta property="og:type"        content="website" />
@@ -53,7 +57,7 @@ const base = import.meta.env.BASE_URL;
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Alternative Concept Technologies",
-      "url": "https://andyrcampbell.github.io/ACT-Website",
+      "url": "https://alternativeconcepttechnologies.com",
       "founder": {
         "@type": "Person",
         "name": "Andrew R. Campbell",
